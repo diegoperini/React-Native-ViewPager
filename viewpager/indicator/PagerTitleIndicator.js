@@ -130,7 +130,7 @@ export default class PagerTitleIndicator extends Component {
 
         const curItemLayoutInfo = itemLayoutInfo[selectedIndex];
         const { width, x: curItemOffsetX } = curItemLayoutInfo.layout;
-        const curItemAbsPosition = width + curItemOffsetX + DEFAULT_ITEM_MARGIN; // add on margin
+        const curItemAbsPosition = width + curItemOffsetX; // add on margin
 
         let moveDir = NONE;
         if (selectedIndex > this._preSelectedIndex) {
@@ -147,17 +147,17 @@ export default class PagerTitleIndicator extends Component {
                 const nextLayoutInfo = itemLayoutInfo[selectedIndex + 1];
                 const width = nextLayoutInfo.layout.width;
                 lastItemOffsetX = nextLayoutInfo.layout.x;
-                lastItemAbsPosition = width + lastItemOffsetX + DEFAULT_ITEM_MARGIN;
+                lastItemAbsPosition = width + lastItemOffsetX;
             } else if (selectedIndex === this._titleCount - 1) {
                 lastItemOffsetX = curItemOffsetX;
                 lastItemAbsPosition = curItemAbsPosition;
             }
             if (this._contentHorOffset > lastItemOffsetX) {
-                const deltaX = curItemOffsetX - DEFAULT_ITEM_MARGIN;
+                const deltaX = curItemOffsetX;
                 this.scroller.scrollTo({ x: deltaX });
             } else if (this._currentMaxHor < lastItemAbsPosition) {
                 const deltaX = lastItemAbsPosition - this._currentMaxHor;
-                this.scroller.scrollTo({ x: deltaX });
+                this.scroller.scrollTo({ x: this._contentHorOffset + deltaX });
             }
         } else if (moveDir === BACKWARD) {
             //indicator move back
@@ -167,14 +167,14 @@ export default class PagerTitleIndicator extends Component {
                 const nextLayoutInfo = itemLayoutInfo[selectedIndex - 1];
                 const width = nextLayoutInfo.layout.width;
                 lastItemOffsetX = nextLayoutInfo.layout.x;
-                lastItemAbsPosition = width + lastItemOffsetX + DEFAULT_ITEM_MARGIN;
+                lastItemAbsPosition = width + lastItemOffsetX;
             } else if (selectedIndex === 0) {
                 lastItemOffsetX = curItemOffsetX;
                 lastItemAbsPosition = curItemAbsPosition;
             }
             if (this._contentHorOffset > lastItemOffsetX || this._currentMaxHor < curItemAbsPosition) {
-                const deltaX = lastItemOffsetX - DEFAULT_ITEM_MARGIN;
-                this.scroller.scrollTo({ x: 0 });
+                const deltaX = lastItemOffsetX;
+                this.scroller.scrollTo({ x: deltaX });
             }
         }
     }
