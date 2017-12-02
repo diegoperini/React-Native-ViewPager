@@ -118,8 +118,8 @@ export default class PagerTitleIndicator extends Component {
                     }}
                     horizontal={true}
                     style={{ flex: 1 }}
-                    bounces={ false }
-                    >
+                    bounces={false}>
+                    
                     {titleViews}
                 </ScrollView>
             </View>
