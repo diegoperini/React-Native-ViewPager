@@ -118,8 +118,7 @@ export default class PagerTitleIndicator extends Component {
                     }}
                     horizontal={true}
                     style={{ flex: 1 }}
-                    bounces={false}>
-                    
+                    >
                     {titleViews}
                 </ScrollView>
             </View>
@@ -158,7 +157,7 @@ export default class PagerTitleIndicator extends Component {
                 this.scroller.scrollTo({ x: deltaX });
             } else if (this._currentMaxHor < lastItemAbsPosition) {
                 const deltaX = lastItemAbsPosition - this._currentMaxHor;
-                this.scroller.scrollTo({ x: this._contentHorOffset + deltaX });
+                this.scroller.scrollTo({ x: deltaX });
             }
         } else if (moveDir === BACKWARD) {
             //indicator move back
@@ -175,7 +174,7 @@ export default class PagerTitleIndicator extends Component {
             }
             if (this._contentHorOffset > lastItemOffsetX || this._currentMaxHor < curItemAbsPosition) {
                 const deltaX = lastItemOffsetX - DEFAULT_ITEM_MARGIN;
-                this.scroller.scrollTo({ x: deltaX });
+                this.scroller.scrollTo({ x: 0 });
             }
         }
     }
